@@ -3,265 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gonzalo Vergara | Ingeniero de Procesos Senior</title>
+    <title>Gonzalo Vergara | Senior Process Engineer & Tech Enthusiast</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- AOS Library for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        
+        :root {
+            --primary: #3b82f6;
+            --secondary: #a855f7;
+            --dark: #020617;
+            --card-bg: rgba(15, 23, 42, 0.6);
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--dark);
+            color: #f1f5f9;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        .dark-bg { background-color: #0f172a; }
-        .dark-card { 
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .bg-gradient-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 35%),
+                radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.1) 0%, transparent 35%);
         }
 
-        .glass-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        .glass {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border-color: rgba(59, 130, 246, 0.3);
+        .glass:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
         }
 
         .gradient-text {
-            background: linear-gradient(90deg, #60a5fa, #a855f7);
+            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .skill-tag {
-            background: rgba(51, 65, 85, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #cbd5e1;
-            display: inline-block;
-            margin: 4px;
-            transition: all 0.2s;
-        }
-        
-        .skill-tag:hover {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
-            color: #fff;
+        .nav-link {
+            position: relative;
         }
 
-        .profile-border {
-            position: relative;
-            padding: 4px;
-            background: linear-gradient(45deg, #3b82f6, #a855f7);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .profile-blob {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             animation: morph 8s ease-in-out infinite;
+            padding: 5px;
         }
 
         @keyframes morph {
-            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
-            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .timeline-line {
+            background: linear-gradient(to bottom, var(--primary), var(--secondary), transparent);
+        }
+
+        .btn-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
         }
     </style>
 </head>
-<body class="dark-bg text-slate-200">
+<body>
 
-    <!-- Navbar -->
-    <nav class="sticky top-0 z-50 bg-[#0f172a]/80 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="font-bold text-xl tracking-tight text-blue-400">Curriculum Vitae Gonzalo Vergara</span>
-            <div class="space-x-6 text-sm font-medium hidden md:block">
-                <a href="#perfil" class="hover:text-blue-400 transition">Perfil</a>
-                <a href="#experiencia" class="hover:text-blue-400 transition">Experiencia</a>
-                <a href="#habilidades" class="hover:text-blue-400 transition">Habilidades</a>
-                <a href="#contacto" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-500 transition shadow-lg shadow-blue-900/20">Contacto</a>
+    <div class="bg-gradient-mesh"></div>
+
+    <!-- Floating CV Button - Link Updated -->
+    <div class="btn-float md:block hidden">
+        <a href="https://github.com/gvergaramunoz/cv/blob/main/CV%20Gonzalo%20Vergara%20M%202026.pdf" 
+           target="_blank" 
+           class="bg-blue-600 hover:bg-blue-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all hover:scale-110 group relative">
+            <i class="fa-solid fa-file-pdf text-xl"></i>
+            <span class="absolute right-16 bg-white text-blue-900 px-3 py-1 rounded text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Ver CV Completo</span>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-[60] bg-slate-950/70 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold">G</div>
+                <span class="font-extrabold text-lg tracking-tight hidden sm:inline">GONZALO<span class="text-blue-500">VERGARA</span></span>
+            </div>
+            <div class="space-x-8 text-sm font-semibold">
+                <a href="#perfil" class="nav-link text-slate-400 hover:text-white transition">Perfil</a>
+                <a href="#habilidades" class="nav-link text-slate-400 hover:text-white transition">Habilidades</a>
+                <a href="#experiencia" class="nav-link text-slate-400 hover:text-white transition">Trayectoria</a>
+                <a href="#contacto" class="bg-blue-600/10 text-blue-400 border border-blue-600/30 px-6 py-2 rounded-full hover:bg-blue-600 hover:text-white transition duration-300">Contacto</a>
             </div>
         </div>
     </nav>
 
-    <!-- Header / Hero -->
-    <header class="max-w-5xl mx-auto px-6 pt-16 pb-16 text-center md:text-left">
-        <div class="flex flex-col md:flex-row items-center gap-12">
-            <div class="flex-1 order-2 md:order-1">
-                <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">
-                    Gonzalo <span class="gradient-text">Vergara</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-blue-400 font-medium mb-6 tracking-tight">
-                    Ingeniero de Procesos Senior
-                </p>
-                <div class="flex flex-wrap justify-center md:justify-start gap-5 text-slate-400 mb-8 text-sm">
-                    <span><i class="fa-solid fa-location-dot mr-2 text-blue-500"></i>Chile</span>
-                    <span><i class="fa-solid fa-envelope mr-2 text-blue-500"></i>g.vergara.munoz@gmail.com</span>
-                    <span><i class="fa-solid fa-phone mr-2 text-blue-500"></i>+56 9 61891262</span>
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden pt-20 pb-24">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7 space-y-8" data-aos="fade-right">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold tracking-widest uppercase">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    </span>
+                    Disponible para Desafíos Senior
                 </div>
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <a href="mailto:g.vergara.munoz@gmail.com" class="bg-white text-slate-900 px-8 py-3 rounded-xl font-bold hover:bg-blue-50 transition shadow-xl flex items-center gap-2">
-                        <i class="fa-solid fa-envelope"></i> Hablemos
+                <h1 class="text-6xl md:text-8xl font-black text-white leading-[0.9]">
+                    Modelando el <br> <span class="gradient-text italic">Futuro Digital.</span>
+                </h1>
+                <p class="text-xl text-slate-400 max-w-xl leading-relaxed">
+                    Ingeniero de Procesos Senior con +12 años transformando la eficiencia operativa en el sector bancario y tecnológico. Especialista en agilidad, BPMN y escalabilidad.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <!-- Updated CV Download/View Button -->
+                    <a href="https://github.com/gvergaramunoz/cv/blob/main/CV%20Gonzalo%20Vergara%20M%202026.pdf" 
+                       target="_blank"
+                       class="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-500 transition shadow-2xl shadow-blue-500/20 flex items-center gap-3">
+                        <i class="fa-solid fa-file-download"></i> Descargar CV PDF
                     </a>
-                    <a href="https://www.linkedin.com/in/gonzalovergaram/" target="_blank" class="bg-[#0077b5] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#005a87] transition shadow-xl flex items-center gap-2">
-                        <i class="fa-brands fa-linkedin text-xl"></i> LinkedIn
-                    </a>
+                    <div class="flex items-center gap-4 px-4">
+                        <a href="https://linkedin.com/in/gonzalovergaram/" class="text-slate-400 hover:text-blue-400 transition text-2xl"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/gvergaramunoz" class="text-slate-400 hover:text-white transition text-2xl"><i class="fa-brands fa-github"></i></a>
+                    </div>
                 </div>
             </div>
-            
-            <div class="order-1 md:order-2">
-                <div class="profile-border w-56 h-56 md:w-64 md:h-64 flex items-center justify-center">
-                    <div class="w-full h-full bg-[#1e293b] rounded-[inherit] overflow-hidden flex items-center justify-center">
+
+            <div class="md:col-span-5 flex justify-center" data-aos="zoom-in">
+                <div class="relative group">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                    
+                    <div class="profile-blob w-72 h-72 md:w-80 md:h-80 relative z-10 overflow-hidden shadow-2xl">
                         <img src="https://media.licdn.com/dms/image/v2/D4E03AQH-3lTq0qMz7w/profile-displayphoto-crop_800_800/B4EZjhjTr_GYAI-/0/1756130786628?e=1770249600&v=beta&t=moZyDM7SxH-eOCl6-VByAxlgYPX8bDtReW3ZhfecCdU" 
                              alt="Gonzalo Vergara" 
-                             class="w-full h-full object-cover">
+                             class="w-full h-full object-cover scale-110">
+                    </div>
+
+                    <div class="absolute -bottom-4 -right-4 glass p-4 rounded-2xl z-20 animate-bounce shadow-xl">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-emerald-500 w-3 h-3 rounded-full"></div>
+                            <span class="text-xs font-bold text-white uppercase tracking-tighter">BPMN 2.0 Expert</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Perfil -->
-    <section id="perfil" class="max-w-5xl mx-auto px-6 py-10">
-        <div class="dark-card glass-card p-10 rounded-3xl border-l-4 border-l-blue-500">
-            <h2 class="text-2xl font-bold mb-6 flex items-center text-white">
-                <i class="fa-solid fa-bolt-lightning mr-3 text-yellow-400"></i>
-                Perfil Profesional
-            </h2>
-            <p class="text-slate-300 leading-relaxed text-lg">
-                Profesional con más de <span class="text-white font-semibold">12 años de trayectoria</span> especialista en levantamiento y modelamiento de procesos utilizando <span class="text-blue-400">BPMN 2.0</span>, análisis funcional y aseguramiento de calidad (QA). Experto en traducir requerimientos de negocio en soluciones funcionales escalables, con dominio avanzado de Jira y Confluence para la gestión ágil de proyectos complejos.
-            </p>
+    <!-- Stats Section -->
+    <div class="max-w-6xl mx-auto px-6 py-12" data-aos="fade-up">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 glass p-10 rounded-[3rem]">
+            <div class="text-center">
+                <div class="text-4xl font-black text-white">+12</div>
+                <div class="text-sm text-slate-500 font-bold uppercase tracking-widest mt-2">Años Exp.</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl font-black text-white">+700</div>
+                <div class="text-sm text-slate-500 font-bold uppercase tracking-widest mt-2">Agentes Genesys</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl font-black text-white">4.0</div>
+                <div class="text-sm text-slate-500 font-bold uppercase tracking-widest mt-2">Versión Industrial</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl font-black text-white">∞</div>
+                <div class="text-sm text-slate-500 font-bold uppercase tracking-widest mt-2">Optimización</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Perfil & Resumen -->
+    <section id="perfil" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-up">
+                <h2 class="text-sm font-bold text-blue-500 uppercase tracking-[0.3em] mb-4">La Estrategia</h2>
+                <h3 class="text-4xl font-bold text-white mb-8 leading-tight">Traduciendo caos organizacional en arquitecturas funcionales.</h3>
+                <div class="space-y-6 text-slate-400 leading-relaxed text-lg">
+                    <p>
+                        Mi enfoque combina el rigor de la <span class="text-white font-semibold">Ingeniería de Procesos</span> con la agilidad del desarrollo de software moderno. No solo dibujo diagramas; diseño sistemas que permiten a las empresas escalar sin fricción.
+                    </p>
+                    <p>
+                        He liderado tracks críticos en instituciones como <span class="text-blue-400">BCI y Cencosud Scotiabank</span>, gestionando desde la migración de plataformas legacy AS400 hasta la implementación de ecosistemas Cloud de última generación.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
+                <div class="glass p-6 rounded-3xl space-y-4">
+                    <i class="fa-solid fa-microchip text-blue-500 text-3xl"></i>
+                    <h4 class="font-bold text-white">Análisis Funcional</h4>
+                    <p class="text-xs text-slate-500">Mapeo de requerimientos técnicos complejos a lenguaje de negocio.</p>
+                </div>
+                <div class="glass p-6 rounded-3xl space-y-4 mt-8">
+                    <i class="fa-solid fa-vial text-purple-500 text-3xl"></i>
+                    <h4 class="font-bold text-white">QA / UAT</h4>
+                    <p class="text-xs text-slate-500">Garantía de calidad en la entrega final del producto.</p>
+                </div>
+                <div class="glass p-6 rounded-3xl space-y-4">
+                    <i class="fa-solid fa-users-gear text-emerald-500 text-3xl"></i>
+                    <h4 class="font-bold text-white">Agilidad Real</h4>
+                    <p class="text-xs text-slate-500">Frameworks Scrum y Kanban aplicados a procesos operativos.</p>
+                </div>
+                <div class="glass p-6 rounded-3xl space-y-4 mt-8">
+                    <i class="fa-solid fa-magnifying-glass-chart text-yellow-500 text-3xl"></i>
+                    <h4 class="font-bold text-white">Benchmarking</h4>
+                    <p class="text-xs text-slate-500">Investigación de mercado para decisiones tecnológicas.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Habilidades -->
-    <section id="habilidades" class="max-w-5xl mx-auto px-6 py-12">
-        <h2 class="text-3xl font-bold mb-10 text-center text-white">Stack de Especialidad</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="dark-card glass-card p-8 rounded-2xl">
-                <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6 text-blue-400">
-                    <i class="fa-solid fa-sitemap text-2xl"></i>
-                </div>
-                <h3 class="font-bold text-white mb-4 uppercase text-xs tracking-widest">Modelado & BPM</h3>
-                <div class="flex flex-wrap">
-                    <span class="skill-tag">BPMN 2.0</span>
-                    <span class="skill-tag">Bizagi</span>
-                    <span class="skill-tag">ARIS</span>
-                    <span class="skill-tag">Lean Process</span>
-                </div>
-            </div>
-            <div class="dark-card glass-card p-8 rounded-2xl">
-                <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 text-purple-400">
-                    <i class="fa-solid fa-chart-line text-2xl"></i>
-                </div>
-                <h3 class="font-bold text-white mb-4 uppercase text-xs tracking-widest">Data & Gestión</h3>
-                <div class="flex flex-wrap">
-                    <span class="skill-tag">Power BI</span>
-                    <span class="skill-tag">Jira / Confluence</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Gemini / AI</span>
+    <section id="habilidades" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-white">Stack Tecnológico</h2>
+            <p class="text-slate-500 mt-4">Herramientas que domino para ejecutar la visión.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass p-8 rounded-[2rem] border-t-4 border-blue-500">
+                    <h4 class="text-xs font-black uppercase tracking-widest text-blue-500 mb-6">Modelado de Procesos</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">BPMN 2.0</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Bizagi Expert</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">ARIS Connect</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Lucidchart</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Visio</span>
+                    </div>
                 </div>
             </div>
-            <div class="dark-card glass-card p-8 rounded-2xl">
-                <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6 text-emerald-400">
-                    <i class="fa-solid fa-vial-circle-check text-2xl"></i>
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass p-8 rounded-[2rem] border-t-4 border-purple-500">
+                    <h4 class="text-xs font-black uppercase tracking-widest text-purple-500 mb-6">Gestión & Datos</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Jira Software</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Confluence</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Power BI</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">SQL Server</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Excel Avanzado</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">AI Tooling</span>
+                    </div>
                 </div>
-                <h3 class="font-bold text-white mb-4 uppercase text-xs tracking-widest">Metodologías</h3>
-                <div class="flex flex-wrap">
-                    <span class="skill-tag">Scrum Foundation</span>
-                    <span class="skill-tag">Agile Management</span>
-                    <span class="skill-tag">QA / UAT</span>
-                    <span class="skill-tag">Kanban</span>
+            </div>
+            <div class="space-y-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass p-8 rounded-[2rem] border-t-4 border-emerald-500">
+                    <h4 class="text-xs font-black uppercase tracking-widest text-emerald-500 mb-6">Frameworks de Trabajo</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Scrum Foundation</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Lean Manufacturing</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">Agile Management</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">QA Strategy</span>
+                        <span class="skill-tag px-4 py-2 rounded-xl text-sm">ITIL Awareness</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experiencia -->
-    <section id="experiencia" class="max-w-5xl mx-auto px-6 py-12">
-        <h2 class="text-3xl font-bold text-white mb-12">Experiencia Laboral</h2>
+    <!-- Experiencia Laboral -->
+    <section id="experiencia" class="max-w-6xl mx-auto px-6 py-20 relative">
+        <h2 class="text-4xl font-bold text-white mb-20 text-center">Experiencia Laboral</h2>
         
-        <div class="space-y-16">
-            <!-- OneInfo / BCI -->
-            <div class="relative pl-10 border-l-2 border-blue-500/30">
-                <div class="absolute -left-[11px] top-0 w-5 h-5 bg-blue-500 rounded-full border-4 border-[#0f172a]"></div>
-                <div class="dark-card glass-card p-8 rounded-2xl">
-                    <div class="flex flex-col md:flex-row md:justify-between mb-6 gap-2">
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">OneInfo Consulting</h3>
-                            <p class="text-blue-400 font-semibold uppercase text-xs tracking-widest mt-1">Senior Process Engineer (Cliente: BCI)</p>
-                        </div>
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Abril 2023 - Actualidad</span>
+        <div class="absolute left-6 md:left-1/2 top-48 bottom-48 w-0.5 timeline-line hidden md:block"></div>
+
+        <div class="space-y-20">
+            <!-- OneInfo -->
+            <div class="relative grid md:grid-cols-2 gap-8 md:gap-24" data-aos="fade-right">
+                <div class="md:text-right">
+                    <h3 class="text-2xl font-bold text-white">OneInfo Consulting</h3>
+                    <p class="text-blue-500 font-bold mb-2">Senior Process Engineer</p>
+                    <p class="text-xs text-slate-500 uppercase tracking-widest font-bold">Abril 2023 — Actualidad</p>
+                    <div class="mt-4 flex flex-wrap md:justify-end gap-2">
+                        <span class="text-[10px] border border-blue-500/30 px-2 py-1 rounded-md text-blue-400">Cliente: BCI</span>
                     </div>
-                    <ul class="space-y-3 text-slate-300">
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-circle-check text-blue-500 mt-1"></i>
-                            <span>Liderazgo en levantamiento de procesos para migración a <span class="text-white">Genesys Cloud</span> usando Bizagi y ARIS.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-circle-check text-blue-500 mt-1"></i>
-                            <span>Masificación tecnológica para <span class="text-white">+700 agentes</span>, presentando hitos en comités técnicos y de negocio.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-circle-check text-blue-500 mt-1"></i>
-                            <span>Asesoría en procesos de licitación e investigación de soluciones de mercado (Benchmarking).</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fa-solid fa-circle-check text-blue-500 mt-1"></i>
-                            <span>Gestión del cambio, capacitación a ejecutivos y seguimiento post-implementación bajo enfoque <span class="text-white">LEAN</span>.</span>
-                        </li>
+                </div>
+                <div class="glass p-8 rounded-3xl relative">
+                    <div class="absolute -left-10 md:-left-[58px] top-8 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.8)] border-4 border-slate-900 z-10"></div>
+                    <ul class="space-y-4 text-slate-400 text-sm leading-relaxed">
+                        <li class="flex gap-3"><i class="fa-solid fa-check-double text-blue-500"></i> Liderazgo en el levantamiento de procesos E2E para la migración masiva a <b>Genesys Cloud</b>.</li>
+                        <li class="flex gap-3"><i class="fa-solid fa-check-double text-blue-500"></i> Diseño de flujos operativos para +700 agentes.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Aplicaciones Computacionales SPA -->
-            <div class="relative pl-10 border-l-2 border-slate-800">
-                <div class="absolute -left-[11px] top-0 w-5 h-5 bg-slate-700 rounded-full border-4 border-[#0f172a]"></div>
-                <div class="dark-card glass-card p-8 rounded-2xl">
-                    <div class="flex flex-col md:flex-row md:justify-between mb-8 gap-2">
+            <!-- Aplicaciones Computacionales -->
+            <div class="relative grid md:grid-cols-2 gap-8 md:gap-24" data-aos="fade-left">
+                <div class="md:order-2">
+                    <h3 class="text-2xl font-bold text-white">Aplicaciones Computacionales SPA</h3>
+                    <p class="text-purple-500 font-bold mb-2">Ingeniero de Procesos</p>
+                    <p class="text-xs text-slate-500 uppercase tracking-widest font-bold">Sept 2013 — Abr 2023</p>
+                </div>
+                <div class="glass p-8 rounded-3xl relative md:order-1">
+                    <div class="absolute -left-10 md:-right-[58px] md:left-auto top-8 w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.8)] border-4 border-slate-900 z-10"></div>
+                    <div class="space-y-6">
                         <div>
-                            <h3 class="text-2xl font-bold text-white">Aplicaciones Computacionales SPA</h3>
-                            <p class="text-slate-400 font-semibold uppercase text-xs tracking-widest mt-1">Ingeniero de Procesos</p>
+                            <h4 class="text-white font-bold text-xs mb-2">Cencosud Scotiabank</h4>
+                            <p class="text-slate-400 text-xs">Migración de procesadora de tarjetas y separación de plataforma AS400. Mapeo BPMN 2.0 exhaustivo.</p>
                         </div>
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Sept 2013 - Abr 2023</span>
+                        <div>
+                            <h4 class="text-white font-bold text-xs mb-2">Cibergestión</h4>
+                            <p class="text-slate-400 text-xs">Análisis funcional para workflow hipotecario Activiti. Responsable de QA y UAT.</p>
+                        </div>
                     </div>
-                    
-                    <div class="space-y-8">
-                        <!-- Cencosud Scotiabank 1 -->
-                        <div class="border-t border-white/5 pt-6">
-                            <h4 class="text-blue-400 font-bold mb-3 flex items-center">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                                Cliente: Cencosud Scotiabank
-                            </h4>
-                            <p class="text-sm text-slate-200 font-medium mb-2">Proyecto: Migración de Procesadora de Tarjetas</p>
-                            <ul class="text-sm text-slate-400 space-y-2">
-                                <li class="flex gap-2"><i class="fa-solid fa-caret-right text-blue-500"></i> Liderazgo del track de levantamiento de aplicativos y diagramación BPMN 2.0.</li>
-                                <li class="flex gap-2"><i class="fa-solid fa-caret-right text-blue-500"></i> Seguimiento, validación y carga de documentación en Confluence.</li>
-                            </ul>
-                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                        <!-- Cencosud Scotiabank 2 -->
-                        <div class="border-t border-white/5 pt-6">
-                            <p class="text-sm text-slate-200 font-medium mb-2">Proyecto: Separación de Plataforma AS400</p>
-                            <ul class="text-sm text-slate-400 space-y-2">
-                                <li class="flex gap-2"><i class="fa-solid fa-caret-right text-blue-500"></i> Liderazgo del equipo de levantamiento de aplicativos en plataforma AS400.</li>
-                                <li class="flex gap-2"><i class="fa-solid fa-caret-right text-blue-500"></i> Documentación técnica y funcional con responsables clave del negocio.</li>
-                            </ul>
+    <!-- Sección de Personalidad & Intereses -->
+    <section class="max-w-6xl mx-auto px-6 py-20">
+        <div class="glass p-12 rounded-[4rem] relative overflow-hidden">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-black text-white mb-6">Más allá de los Procesos</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Entusiasta del hardware clásico y la narrativa cinematográfica de los 90. Me apasiona entender cómo la tecnología del pasado cimentó la agilidad del presente.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center gap-2 text-xs font-bold text-slate-500 bg-white/5 px-4 py-2 rounded-full">
+                            <i class="fa-solid fa-film text-blue-500"></i> 90s Cinema
                         </div>
-
-                        <!-- Cibergestion -->
-                        <div class="border-t border-white/5 pt-6">
-                            <h4 class="text-blue-400 font-bold mb-3 flex items-center">
-                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                                Cliente: Cibergestión
-                            </h4>
-                            <p class="text-sm text-slate-200 font-medium mb-2">Proyecto: Migración Workflow Hipotecario (PHP a Java)</p>
-                            <ul class="text-sm text-slate-400 space-y-2">
-                                <li class="flex gap-2"><i class="fa-solid fa-caret-right text-blue-500"></i> Análisis funcional con motor Activiti para curse de créditos hipotecarios.</li>
-                                <li class="flex gap-2"><i class="fa-solid fa-caret-right text-blue-500"></i> Levantamiento de casos de prueba y ejecución de planes QA para la nueva plataforma.</li>
-                            </ul>
+                        <div class="flex items-center gap-2 text-xs font-bold text-slate-500 bg-white/5 px-4 py-2 rounded-full">
+                            <i class="fa-solid fa-gamepad text-purple-500"></i> Retro Gaming
                         </div>
+                    </div>
+                </div>
+                <div class="bg-black/40 rounded-3xl p-6 font-mono text-[10px] text-emerald-500/70 border border-emerald-500/20">
+                    <p class="mb-2 text-emerald-500 font-bold">// system_boot.log</p>
+                    <p>> Characters recognized: [Nedry, Arnold, Muldoon, Wu, Harding, Ludlow, Gennaro]</p>
+                    <p>> "Hold onto your butts" - Ray Arnold</p>
+                    <p>> Optimization status: 100%</p>
+                    <div class="mt-4 flex gap-1">
+                        <div class="w-1.5 h-3 bg-emerald-500 animate-pulse"></div>
+                        <span>Awaiting input_</span>
                     </div>
                 </div>
             </div>
@@ -269,23 +394,33 @@
     </section>
 
     <!-- Footer -->
-    <footer id="contacto" class="bg-black py-20 mt-20">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6 text-white">¿Hablamos de procesos?</h2>
-            <p class="text-slate-400 mb-10 max-w-lg mx-auto">Experto en optimización, agilidad y transformación digital bancaria. Disponible para nuevos desafíos.</p>
-            <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="mailto:g.vergara.munoz@gmail.com" class="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl transition-all font-bold">
-                    <i class="fa-solid fa-paper-plane"></i> Email Profesional
+    <footer id="contacto" class="bg-slate-950 pt-32 pb-12 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-5xl md:text-7xl font-black text-white mb-8">¿Listo para optimizar?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20">
+                <a href="mailto:g.vergara.munoz@gmail.com" class="glass p-6 rounded-3xl group hover:bg-blue-600 transition">
+                    <i class="fa-solid fa-envelope text-2xl text-blue-500 group-hover:text-white mb-4 block"></i>
+                    <span class="block text-white font-bold text-sm">g.vergara.munoz@gmail.com</span>
                 </a>
-                <a href="https://www.linkedin.com/in/gonzalovergaram/" target="_blank" class="flex items-center justify-center gap-3 bg-[#0077b5] hover:bg-[#005a87] text-white px-8 py-4 rounded-2xl transition-all font-bold">
-                    <i class="fa-brands fa-linkedin text-xl"></i> LinkedIn
+                <a href="https://linkedin.com/in/gonzalovergaram/" target="_blank" class="glass p-6 rounded-3xl group hover:bg-[#0077b5] transition">
+                    <i class="fa-brands fa-linkedin text-2xl text-[#0077b5] group-hover:text-white mb-4 block"></i>
+                    <span class="block text-white font-bold text-sm">LinkedIn</span>
                 </a>
-                <a href="tel:+56961891262" class="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-2xl transition-all border border-white/10">
-                    <i class="fa-solid fa-phone"></i> +56 9 61891262
+                <a href="tel:+56961891262" class="glass p-6 rounded-3xl group hover:bg-emerald-600 transition">
+                    <i class="fa-solid fa-phone text-2xl text-emerald-500 group-hover:text-white mb-4 block"></i>
+                    <span class="block text-white font-bold text-sm">+56 9 61891262</span>
                 </a>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 text-slate-600 text-xs">
+                <p>© 2026 Gonzalo Vergara. Todos los derechos reservados.</p>
+                <p class="font-mono mt-4 md:mt-0">Designed for 2026 performance</p>
             </div>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
 </body>
 </html>
